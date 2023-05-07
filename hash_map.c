@@ -153,7 +153,7 @@ void hash_map_insert(struct hash_map *map, char *key, void *val)
 	map->length++;
 }
 
-int hash_map_at(struct hash_map *map, char *key, void **val)
+int64_t hash_map_at(struct hash_map *map, char *key, void **val)
 {
 	uint64_t index;
 
@@ -199,7 +199,7 @@ void hash_map_iter_destroy(struct hash_map_iter *iter)
 	free(iter);
 }
 
-int hash_map_iter_next(struct hash_map_iter *iter, char **key, void **val)
+int64_t hash_map_iter_next(struct hash_map_iter *iter, char **key, void **val)
 {
 	while (iter->index < iter->map->capacity) {
 		if (iter->map->set[iter->index].key != NULL) {
