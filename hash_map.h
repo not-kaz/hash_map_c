@@ -3,10 +3,16 @@
 
 #include <stdint.h>
 
+#define HASH_MAP_CREATE(map, iter) \
+	struct hash_map *map = hash_map_create(); \
+	struct hash_map_iter *iter = hash_map_iter_create(map);
+#define HASH_MAP_DESTROY(map, iter) \
+	hash_map_iter_destroy(iter); \
+	hash_map_destroy(map);
 #define HASH_MAP_INSERT(map, key, val) hash_map_insert(map, key, (void *)(val))
 #define HASH_MAP_AT(map, key, val) hash_map_at(map, key, (void *)&(val))
-#define HASH_MAP_FOR_EACH(iter, key, val) \
-	for (; hash_map_iter_next(iter, &(key), &(val)); )
+#define HASH_MAP_FOR_EACH(iter, key_ptr, val_ptr) \
+	for (; hash_map_iter_next(iter, &(key_ptr), (void *)&(val_ptr)); )
 
 struct hash_map *hash_map_create(void);
 void hash_map_destroy(struct hash_map *map);
